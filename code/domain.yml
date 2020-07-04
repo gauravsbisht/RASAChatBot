@@ -1,0 +1,78 @@
+intents:
+  - request_restaurant:
+      use_entities: []
+  - chitchat:
+      use_entities: []
+  - inform
+  - affirm
+  - deny
+  - stop
+  - thankyou
+  - greet
+  - bot_challenge
+  - location_intent
+  - cuisine_intent
+  - budget_intent
+  - email_intent
+
+entities:
+  - cuisine
+  - feedback
+  - location
+  - budget
+  - email_affirm
+  - email_id
+
+slots:
+  cuisine:
+    type: unfeaturized
+    auto_fill: false
+  location:
+    type: unfeaturized
+    auto_fill: false
+  budget:
+    type: unfeaturized
+    auto_fill: false
+  email_affirm:
+    type: text
+    auto_fill: true
+  email_id:
+    type: text
+    auto_fill: true
+
+actions:
+- action_search_restaurants
+- action_send_email
+
+responses:
+  utter_ask_location:
+    - text: "In what location? "
+  utter_ask_cuisine:
+    - text: "What kind of cuisine would you like to have?  \n 1. Chinese \n 2. Mexican \n 3. Italian \n 4. American \n 5. Thai \n 6. North Indian"
+  utter_ask_budget:
+    - text: "What's the average budget for two people? \n 1. Lesser than Rs. 300 \n 2. Rs. 300 to 700 \n 3. More than 700 "
+  utter_ask_email:
+    - text: "Should I send you details of all the restaurants on email?"
+  utter_noworries:
+    - text: "you are welcome :)"
+  utter_chitchat:
+    - text: "chitchat"
+  utter_ask_continue:
+    - text: "do you want to continue?"
+  utter_wrong_cuisine:
+    - text: "Cuisine type is not in the database, please try again"
+  utter_wrong_city:
+    - text: "City is not in our database"
+  utter_default:
+    - text: "sorry, I didn't understand you, please try input something else"
+  utter_greet:
+    - text: "Hi there ! How may I help you?"
+  utter_restart:
+    - text: "restarted"
+
+forms:
+  - restaurant_form
+
+session_config:
+  session_expiration_time: 60  # value in minutes
+  carry_over_slots_to_new_session: true
