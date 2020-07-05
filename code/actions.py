@@ -21,17 +21,22 @@ class ActionSendEmail(Action):
         return 'action_send_email'
 
     def run(self, dispatcher, tracker, domain):
-        affirm = tracker.get_slot('email_affirm')
-        email_id = tracker.get_slot('email_id')
-         ## sendemail
-        s = smtplib.SMTP('smtp.gmail.com', 587)
-        s.starttls()
-        s.login("venkygaurav.upgrad@gmail.com", "upgrad123")
-        s.sendmail("venkygaurav.upgrad@gmail.com", "venkateshan@gmail.com", email_content)
-        s.quit()
+        try:
+            affirm = tracker.get_slot('email_affirm')
+            email_id = tracker.get_slot('email_id')
+             ## sendemail
+            s = smtplib.SMTP('smtp.gmail.com', 587)
+            s.ehlo()
+            s.starttls()
+            s.login("venkygaurav.upgrad@gmail.com", "upgrad123")
+            s.sendmail("venkygaurav.upgrad@gmail.com", "venkateshan@gmail.com", email_content)
+            s.quit()
         ## move to a function later
-        response = "Email has been sent"
-        dispatcher.utter_message("-----" + response)
+            response = "Email has been sent"
+            dispatcher.utter_message("-----" + response)
+        except Exception as e:
+            dispatcher.utter_message('Issue in sending message \n' + str(e))
+
         return [SlotSet('email_affirm', affirm)]
 
 class ActionSearchRestaurants(Action):
@@ -47,8 +52,20 @@ class ActionSearchRestaurants(Action):
         d1 = json.loads(location_detail)
         lat = d1["location_suggestions"][0]["latitude"]
         lon = d1["location_suggestions"][0]["longitude"]
-        cuisines_dict = {'bakery': 5, 'chinese': 25, 'cafe': 30, 'italian': 55, 'biryani': 7, 'north indian': 50,
-                         'south indian': 85}
+        cuisines_dict = {
+            'american': 1,
+            'mexican': 73,
+            'italian': 55,
+            'thai': 95,
+            'chinese': 25,
+            'north indian': 50,
+            'cafe': 30,
+            'bakery': 5,
+            'biryani': 7,
+            'south indian': 85
+        }
+
+        ## venky/gaurav - need to get right codes for the cusinesb
         results = zomato.restaurant_search("", lat, lon, str(cuisines_dict.get(cuisine)), 5)
         d = json.loads(results)
         response = "Showing you top rated restaurants: \n"
@@ -59,7 +76,7 @@ class ActionSearchRestaurants(Action):
                 response = response + "Found " + restaurant['restaurant']['name'] + " in " + \
                            restaurant['restaurant']['location']['address'] + " has been rated  " + \
                            restaurant['restaurant']['user_rating']['aggregate_rating'] + "\n"
-
+        response=response+"\n \n"
         dispatcher.utter_message("-----" + response)
         email_content=response
         return [SlotSet('location', loc)]
