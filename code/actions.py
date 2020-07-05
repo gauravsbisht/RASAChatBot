@@ -13,6 +13,8 @@ from typing import Dict, Text, Any, List, Union, Optional
 from rasa_sdk import Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormAction
+import pandas as pd
+
 
 email_content=""
 
@@ -48,6 +50,8 @@ class ActionSearchRestaurants(Action):
         zomato = zomatopy.initialize_app(config)
         loc = tracker.get_slot('location')
         cuisine = tracker.get_slot('cuisine')
+        budget = tracker.get_slot('budget')
+
         location_detail = zomato.get_location(loc, 1)
         d1 = json.loads(location_detail)
         lat = d1["location_suggestions"][0]["latitude"]
@@ -72,10 +76,29 @@ class ActionSearchRestaurants(Action):
         if d['results_found'] == 0:
             response = "no results"
         else:
-            for restaurant in d['restaurants']:
-                response = response + "Found " + restaurant['restaurant']['name'] + " in " + \
-                           restaurant['restaurant']['location']['address'] + " has been rated  " + \
-                           restaurant['restaurant']['user_rating']['aggregate_rating'] + "\n"
+            df = pd.DataFrame([{'restaurant_name': x['restaurant']['name'],'budget_for2people': x['restaurant']['average_cost_for_two'],
+             'restaurant_rating': x['restaurant']['user_rating']['aggregate_rating'],
+            'restaurant_address': x['restaurant']['location']['address']
+             } for x in d['restaurants']])
+            
+              
+            def budget_bucket(row):
+                if row['budget_for2people'] <300 :
+                    return 'Lesser than Rs. 300'
+                elif 300 <= row['budget_for2people'] <700 :
+                    return 'Rs. 300 to 700'
+                else:
+                    return 'More than 700'
+            df['budget_bucket'] = df.apply(lambda row: budget_bucket(row),axis=1)
+            restaurant_df = df[(df['budget_bucket'].str.strip(' ') == str(budget).strip())].sort_values(by='restaurant_rating', ascending=False).head(5)
+            #print("Before Filtering",df.head())
+            #print("After Filtering ",restaurant_df.head())    
+            if len(restaurant_df) == 0:
+                response = "no results"
+            else:
+                for indx in restaurant_df.index: 
+                    response = response + "Found " + restaurant_df['restaurant_name'][indx] + " in " + \
+                           restaurant_df['restaurant_address'][indx]+"\n with budget for 2 persons as " + str(restaurant_df['budget_for2people'][indx])+ "\n"
         response=response+"\n \n"
         dispatcher.utter_message("-----" + response)
         email_content=response
