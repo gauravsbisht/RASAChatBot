@@ -216,7 +216,7 @@ class Zomato:
         return restaurant_details
 
 
-    def restaurant_search(self, query="", latitude="", longitude="", cuisines="", limit=5):
+    def restaurant_search(self, query="", latitude="", longitude="", cuisines="", limit=None):
         """
         Takes either query, latitude and longitude or cuisine as input.
         Returns a list of Restaurant IDs.

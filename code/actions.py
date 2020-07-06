@@ -70,7 +70,7 @@ class ActionSearchRestaurants(Action):
         }
 
         ## venky/gaurav - need to get right codes for the cusinesb
-        results = zomato.restaurant_search("", lat, lon, str(cuisines_dict.get(cuisine)), 5)
+        results = zomato.restaurant_search("", lat, lon, str(cuisines_dict.get(cuisine)), "")
         d = json.loads(results)
         response = "Showing you top rated restaurants: \n"
         if d['results_found'] == 0:
@@ -91,8 +91,8 @@ class ActionSearchRestaurants(Action):
                     return 'More than 700'
             df['budget_bucket'] = df.apply(lambda row: budget_bucket(row),axis=1)
             restaurant_df = df[(df['budget_bucket'].str.strip(' ') == str(budget).strip())].sort_values(by='restaurant_rating', ascending=False).head(5)
-            #print("Before Filtering",df.head())
-            #print("After Filtering ",restaurant_df.head())    
+            print("Before Filtering",df.head())
+            print("After Filtering ",restaurant_df.head())    
             if len(restaurant_df) == 0:
                 response = "no results"
             else:
