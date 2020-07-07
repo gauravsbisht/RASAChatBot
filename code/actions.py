@@ -8,12 +8,15 @@ import zomatopy
 import json
 import smtplib
 
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
 from typing import Dict, Text, Any, List, Union, Optional
 
 from rasa_sdk import Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormAction
-import pandas as pd
+# import pandas as pd
 
 
 email_content=""
@@ -30,8 +33,16 @@ class ActionSendEmail(Action):
             s = smtplib.SMTP('smtp.gmail.com', 587)
             s.ehlo()
             s.starttls()
+            msg = MIMEMultipart()
+            msg['From'] = "venkygaurav.upgrad@gmail.com"
+            msg['TO'] = "venkateshan@gmail.com"
+            subject = 'Hello from chatbox'
+            msg['Subject'] = subject
+            body = email_content
+            msg.attach(MIMEText(body, 'plain'))
+            text = msg.as_string()
             s.login("venkygaurav.upgrad@gmail.com", "upgrad123")
-            s.sendmail("venkygaurav.upgrad@gmail.com", "venkateshan@gmail.com", email_content)
+            s.sendmail("venkygaurav.upgrad@gmail.com", "venkateshan@gmail.com", text)
             s.quit()
         ## move to a function later
             response = "Email has been sent"
@@ -46,12 +57,12 @@ class ActionSearchRestaurants(Action):
         return 'action_search_restaurants'
 
     def run(self, dispatcher, tracker, domain):
+        count = 0
         config = {"user_key": "f4924dc9ad672ee8c4f8c84743301af5"}
         zomato = zomatopy.initialize_app(config)
         loc = tracker.get_slot('location')
         cuisine = tracker.get_slot('cuisine')
-        budget = tracker.get_slot('budget')
-
+        price = tracker.get_slot('budget')
         location_detail = zomato.get_location(loc, 1)
         d1 = json.loads(location_detail)
         lat = d1["location_suggestions"][0]["latitude"]
@@ -68,41 +79,43 @@ class ActionSearchRestaurants(Action):
             'biryani': 7,
             'south indian': 85
         }
+ #       response = price
+ #       dispatcher.utter_message(response)
 
-        ## venky/gaurav - need to get right codes for the cusinesb
-        results = zomato.restaurant_search("", lat, lon, str(cuisines_dict.get(cuisine)), "")
+        ## venky/gaurav - need to get right codes for the cusines
+        results = zomato.restaurant_search("", lat, lon, str(cuisines_dict.get(cuisine)), 100000)
         d = json.loads(results)
         response = "Showing you top rated restaurants: \n"
         if d['results_found'] == 0:
-            response = "no results"
+            response= "No restaurant found for your criteria"
         else:
-            df = pd.DataFrame([{'restaurant_name': x['restaurant']['name'],'budget_for2people': x['restaurant']['average_cost_for_two'],
-             'restaurant_rating': x['restaurant']['user_rating']['aggregate_rating'],
-            'restaurant_address': x['restaurant']['location']['address']
-             } for x in d['restaurants']])
-            
-              
-            def budget_bucket(row):
-                if row['budget_for2people'] <300 :
-                    return 'Lesser than Rs. 300'
-                elif 300 <= row['budget_for2people'] <700 :
-                    return 'Rs. 300 to 700'
-                else:
-                    return 'More than 700'
-            df['budget_bucket'] = df.apply(lambda row: budget_bucket(row),axis=1)
-            restaurant_df = df[(df['budget_bucket'].str.strip(' ') == str(budget).strip())].sort_values(by='restaurant_rating', ascending=False).head(5)
-            print("Before Filtering",df.head())
-            print("After Filtering ",restaurant_df.head())    
-            if len(restaurant_df) == 0:
-                response = "no results"
-            else:
-                for indx in restaurant_df.index: 
-                    response = response + "Found " + restaurant_df['restaurant_name'][indx] + " in " + \
-                           restaurant_df['restaurant_address'][indx]+"\n with budget for 2 persons as " + str(restaurant_df['budget_for2people'][indx])+ "\n"
-        response=response+"\n \n"
-        dispatcher.utter_message("-----" + response)
-        email_content=response
+            for restaurant in sorted(d['restaurants'], key=lambda x: x['restaurant']['user_rating']['aggregate_rating'], reverse=True):
+                #Getting Top 10 restaurants for chatbot response
+                if((price == 'low') and (restaurant['restaurant']['average_cost_for_two'] < 300) and (count < 10)):
+                    response=response+ restaurant['restaurant']['name']+ " in "+ restaurant['restaurant']['location']['address']+ " has been rated "+ restaurant['restaurant']['user_rating']['aggregate_rating']+"."
+                    response=response+" And the average price for two people is: "+ str(restaurant['restaurant']['average_cost_for_two'])+"\n"
+                    count = count + 1
+                elif((price == 'medium') and (restaurant['restaurant']['average_cost_for_two'] >= 300) and (restaurant['restaurant']['average_cost_for_two'] <= 700) and (count < 10)):
+                    response=response+ restaurant['restaurant']['name']+ " in "+ restaurant['restaurant']['location']['address']+ " has been rated "+ restaurant['restaurant']['user_rating']['aggregate_rating']+"\n"
+                    response=response+" And the average price for two people is: "+ str(restaurant['restaurant']['average_cost_for_two'])+"\n"
+                    count = count + 1
+                elif((price == 'high') and (restaurant['restaurant']['average_cost_for_two'] > 700) and (count < 10)):
+                    response=response+ restaurant['restaurant']['name']+ " in "+ restaurant['restaurant']['location']['address']+ " has been rated "+ restaurant['restaurant']['user_rating']['aggregate_rating']+"\n"
+                    response=response+" And the average price for two people is: "+ str(restaurant['restaurant']['average_cost_for_two'])+"\n"
+                    count = count + 1
+                if(count==5):
+                    dispatcher.utter_message(response)
+        if(count<5 and count>0):
+            dispatcher.utter_message(response)
+        if(count==0):
+            response = "Sorry, No results found for your criteria. Would you like to search for some other restaurants?"
+            dispatcher.utter_message(response)
+
+        global email_content
+        email_content = response
         return [SlotSet('location', loc)]
+
+
 
 class RestaurantForm(FormAction):
     """Example of a custom form action"""
@@ -214,6 +227,41 @@ class RestaurantForm(FormAction):
             # validation failed, set this slot to None, meaning the
             # user will be asked for the slot again
             return {"cuisine": None}
+    @staticmethod
+    def budget_db() -> List[Text]:
+        """Database of supported cuisines"""
+
+        return [
+            "300-700",
+            "greater than 700",
+            "lesser than 300",
+        ]
+    def validate_budget(
+        self,
+        value: Text,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        """Validate budget value."""
+
+        if value.lower() in self.budget_db():
+            # validation succeeded, set the value of the "budget" slot to value
+            budget_return=""
+            if(value == '300-700'):
+                budget_return= 'medium'
+            elif(value == "less than 300"):
+                budget_return = 'low'
+            elif(value == "greater than 700"):
+                budget_return = 'high'
+            else:
+                budget_return=None
+            return {"budget": budget_return}
+        else:
+            dispatcher.utter_message(template="utter_wrong_budget")
+            # validation failed, set this slot to None, meaning the
+            # user will be asked for the slot again
+            return {"budget": None}
 
     def validate_num_people(
         self,

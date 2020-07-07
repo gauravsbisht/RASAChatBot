@@ -262,6 +262,7 @@
 ## intent:budget_intent
 - [300-700](budget) range
 - [lesser than 300](budget)
+- [300-700](budget)
 - Rs [300-700](budget)
 - [more than 700](budget)
 - [More than 700](budget)
