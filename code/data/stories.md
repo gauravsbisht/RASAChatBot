@@ -13,8 +13,8 @@
     - action_send_email
 * thankyou
     - utter_goodbye
-    - export
-
+	- action_restart
+	- utter_restart
 ## unhappy path
 * greet
     - utter_greet
@@ -27,6 +27,8 @@
     - form{"name": null}
 * thankyou
     - utter_goodbye
+	- action_restart
+	- utter_restart
 
 ## very unhappy path
 * greet
@@ -46,6 +48,8 @@
     - form{"name": null}
 * thankyou
     - utter_goodbye
+	- action_restart
+	- utter_restart
 
 ## stop but continue path
 * greet
@@ -76,6 +80,8 @@
     - form{"name": null}
 * thankyou
     - utter_goodbye
+	- action_restart
+	- utter_restart
 
 ## chitchat stop but continue and chitchat path
 * greet
@@ -96,6 +102,8 @@
     - form{"name": null}
 * thankyou
     - utter_goodbye
+	- action_restart
+	- utter_restart
 
 ## chitchat, stop and really stop path
 * greet
@@ -113,3 +121,5 @@
     - form{"name": null}
 * thankyou
     - utter_goodbye
+	- action_restart
+	- utter_restart

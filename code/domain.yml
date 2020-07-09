@@ -70,7 +70,7 @@ responses:
   utter_greet:
     - text: "Hi there ! How may I help you?"
   utter_restart:
-    - text: "restarted"
+    - text: "Restarted"
   utter_goodbye:
     - text: Bye-bye
     - text: Bon Appetit!
