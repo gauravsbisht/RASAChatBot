@@ -12,7 +12,8 @@
     - slot{"email_id":"xyz@gmail.com"}
     - action_send_email
 * thankyou
-    - utter_noworries
+    - utter_goodbye
+    - export
 
 ## unhappy path
 * greet
@@ -25,7 +26,7 @@
     - restaurant_form
     - form{"name": null}
 * thankyou
-    - utter_noworries
+    - utter_goodbye
 
 ## very unhappy path
 * greet
@@ -44,7 +45,7 @@
     - restaurant_form
     - form{"name": null}
 * thankyou
-    - utter_noworries
+    - utter_goodbye
 
 ## stop but continue path
 * greet
@@ -58,8 +59,7 @@
     - restaurant_form
     - form{"name": null}
 * thankyou
-    - utter_noworries
-
+    - utter_goodbye
 ## stop but continue and chitchat path
 * greet
     - utter_greet
@@ -75,7 +75,7 @@
     - restaurant_form
     - form{"name": null}
 * thankyou
-    - utter_noworries
+    - utter_goodbye
 
 ## chitchat stop but continue and chitchat path
 * greet
@@ -95,7 +95,7 @@
     - restaurant_form
     - form{"name": null}
 * thankyou
-    - utter_noworries
+    - utter_goodbye
 
 ## chitchat, stop and really stop path
 * greet
@@ -111,3 +111,5 @@
 * deny
     - action_deactivate_form
     - form{"name": null}
+* thankyou
+    - utter_goodbye

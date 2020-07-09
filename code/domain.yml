@@ -61,6 +61,8 @@ responses:
     - text: "do you want to continue?"
   utter_wrong_cuisine:
     - text: "Cuisine type is not in the database, please try again"
+  utter_wrong_budget:
+    - text: "Budget type is not in the database, please try again"
   utter_wrong_city:
     - text: "City is not in our database"
   utter_default:
@@ -69,6 +71,9 @@ responses:
     - text: "Hi there ! How may I help you?"
   utter_restart:
     - text: "restarted"
+  utter_goodbye:
+    - text: Bye-bye
+    - text: Bon Appetit!
 
 forms:
   - restaurant_form

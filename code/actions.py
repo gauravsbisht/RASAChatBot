@@ -35,14 +35,17 @@ class ActionSendEmail(Action):
             s.starttls()
             msg = MIMEMultipart()
             msg['From'] = "venkygaurav.upgrad@gmail.com"
-            msg['TO'] = "venkateshan@gmail.com"
+            msg['TO'] = email_id
             subject = 'Hello from chatbox'
             msg['Subject'] = subject
             body = email_content
             msg.attach(MIMEText(body, 'plain'))
             text = msg.as_string()
             s.login("venkygaurav.upgrad@gmail.com", "upgrad123")
-            s.sendmail("venkygaurav.upgrad@gmail.com", "venkateshan@gmail.com", text)
+            response = affirm+' id : '+email_id
+            dispatcher.utter_message("-----" + response)
+            if(affirm == 'yes'):
+                s.sendmail("venkygaurav.upgrad@gmail.com", email_id, text)
             s.quit()
         ## move to a function later
             response = "Email has been sent"
@@ -79,38 +82,46 @@ class ActionSearchRestaurants(Action):
             'biryani': 7,
             'south indian': 85
         }
- #       response = price
+#        response = price + loc + cuisine
  #       dispatcher.utter_message(response)
-
         ## venky/gaurav - need to get right codes for the cusines
-        results = zomato.restaurant_search("", lat, lon, str(cuisines_dict.get(cuisine)), 100000)
+       # response = "Showing you top rated restaurants: \n"
+        results = zomato.restaurant_search("", lat, lon, str(cuisines_dict.get(cuisine)), 50000)
         d = json.loads(results)
-        response = "Showing you top rated restaurants: \n"
+        response=""
         if d['results_found'] == 0:
-            response= "No restaurant found for your criteria"
+            response = "No restaurant found for your criteria"
         else:
-            for restaurant in sorted(d['restaurants'], key=lambda x: x['restaurant']['user_rating']['aggregate_rating'], reverse=True):
-                #Getting Top 10 restaurants for chatbot response
-                if((price == 'low') and (restaurant['restaurant']['average_cost_for_two'] < 300) and (count < 10)):
-                    response=response+ restaurant['restaurant']['name']+ " in "+ restaurant['restaurant']['location']['address']+ " has been rated "+ restaurant['restaurant']['user_rating']['aggregate_rating']+"."
-                    response=response+" And the average price for two people is: "+ str(restaurant['restaurant']['average_cost_for_two'])+"\n"
+            for restaurant in sorted(d['restaurants'], key=lambda x: x['restaurant']['user_rating']['aggregate_rating'],
+                                     reverse=True):
+                # Getting Top 10 restaurants for chatbot response
+                if ((price == 'low') and (restaurant['restaurant']['average_cost_for_two'] < 300) and (count <= 5)):
+                    response = response + str(count+1)+ "." + "Restaurant :: " + restaurant['restaurant']['name'] + " in " + \
+                               restaurant['restaurant']['location']['address'] + " has been rated " + \
+                               restaurant['restaurant']['user_rating']['aggregate_rating'] + "."
+                    response = response + " And the average price for two people is: " + str(
+                        restaurant['restaurant']['average_cost_for_two']) + "\n"
                     count = count + 1
-                elif((price == 'medium') and (restaurant['restaurant']['average_cost_for_two'] >= 300) and (restaurant['restaurant']['average_cost_for_two'] <= 700) and (count < 10)):
-                    response=response+ restaurant['restaurant']['name']+ " in "+ restaurant['restaurant']['location']['address']+ " has been rated "+ restaurant['restaurant']['user_rating']['aggregate_rating']+"\n"
-                    response=response+" And the average price for two people is: "+ str(restaurant['restaurant']['average_cost_for_two'])+"\n"
+                elif ((price == 'medium') and (restaurant['restaurant']['average_cost_for_two'] >= 300) and (
+                        restaurant['restaurant']['average_cost_for_two'] <= 700) and (count <= 5)):
+                    response = response + str(count+1) + "." + "Restaurant :: " + restaurant['restaurant']['name'] + " in " + \
+                               restaurant['restaurant']['location']['address'] + " has been rated " + \
+                               restaurant['restaurant']['user_rating']['aggregate_rating'] + "\n"
+                    response = response + " And the average price for two people is: " + str(
+                        restaurant['restaurant']['average_cost_for_two']) + "\n"
                     count = count + 1
-                elif((price == 'high') and (restaurant['restaurant']['average_cost_for_two'] > 700) and (count < 10)):
-                    response=response+ restaurant['restaurant']['name']+ " in "+ restaurant['restaurant']['location']['address']+ " has been rated "+ restaurant['restaurant']['user_rating']['aggregate_rating']+"\n"
-                    response=response+" And the average price for two people is: "+ str(restaurant['restaurant']['average_cost_for_two'])+"\n"
+                elif ((price == 'high') and (restaurant['restaurant']['average_cost_for_two'] > 700) and (count <= 5)):
+                    response = response + str(count+1) + "." + "Restaurant :: " + restaurant['restaurant']['name'] + " in " + \
+                               restaurant['restaurant']['location']['address'] + " has been rated " + \
+                               restaurant['restaurant']['user_rating']['aggregate_rating'] + "\n"
+                    response = response + " And the average price for two people is: " + str(
+                        restaurant['restaurant']['average_cost_for_two']) + "\n"
                     count = count + 1
-                if(count==5):
-                    dispatcher.utter_message(response)
-        if(count<5 and count>0):
+        if (count <= 5 and count > 0):
             dispatcher.utter_message(response)
-        if(count==0):
+        if (count == 0):
             response = "Sorry, No results found for your criteria. Would you like to search for some other restaurants?"
             dispatcher.utter_message(response)
-
         global email_content
         email_content = response
         return [SlotSet('location', loc)]
@@ -262,47 +273,6 @@ class RestaurantForm(FormAction):
             # validation failed, set this slot to None, meaning the
             # user will be asked for the slot again
             return {"budget": None}
-
-    def validate_num_people(
-        self,
-        value: Text,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any],
-    ) -> Dict[Text, Any]:
-        """Validate num_people value."""
-
-        if self.is_int(value) and int(value) > 0:
-            return {"num_people": value}
-        else:
-            dispatcher.utter_message(template="utter_wrong_num_people")
-            # validation failed, set slot to None
-            return {"num_people": None}
-
-    def validate_outdoor_seating(
-        self,
-        value: Text,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any],
-    ) -> Dict[Text, Any]:
-        """Validate outdoor_seating value."""
-
-        if isinstance(value, str):
-            if "out" in value:
-                # convert "out..." to True
-                return {"outdoor_seating": True}
-            elif "in" in value:
-                # convert "in..." to False
-                return {"outdoor_seating": False}
-            else:
-                dispatcher.utter_message(template="utter_wrong_outdoor_seating")
-                # validation failed, set slot to None
-                return {"outdoor_seating": None}
-
-        else:
-            # affirm/deny was picked up as T/F
-            return {"outdoor_seating": value}
 
     def submit(
         self,
