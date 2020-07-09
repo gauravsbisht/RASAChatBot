@@ -383,6 +383,8 @@
 - I'll prefer [Chinese](cuisine)
 - I’ll prefer [Thai](cuisine)
 
+## regex:email_id
+- [A-Z0-9a-z._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}
 ## intent:email_intent
 - [yes](email_affirm). Please send it to [ahbcdj@dkj.com](email_id) 
 - [no](email_affirm). 
@@ -396,6 +398,11 @@
 - [no](email_affirm)
 - [not needed]{"entity": "email_affirm", "value": "no"}.Please send it to [xyz@sth.edu](email_id)
 - [yes](email_confirm) please. 
+- [yes](email_affirm). Send it to [ab_sb@gmail.com](email_id)
+- [yes](email_affirm). Send it to [xyz_lmno@gmail.com](email_id)
+- [yes](email_affirm). Send it to [abcdef_test@gmail.com](email_id)
+- [yes](email_affirm). Send it to [ab.sb@gmail.com](email_id)
+- [yes](email_affirm). Send it to [peter-hans@gmail.com](email_id)
 
 ## intent:budget_intent
 - [300-700](budget) range
