@@ -148,14 +148,14 @@ class RestaurantForm(FormAction):
             - intent: value pairs
             - a whole message
             or a list of them, where a first match will be picked"""
-
+        #print("Inside Slot Mapping")
         return {
             "location": [
                 self.from_entity(
-                    entity="location", intent="location_intent"
+                    entity="location", intent=["request_restaurant","location_intent"]
                 ),
             ],
-            "cuisine": [self.from_entity(entity="cuisine", intent="cuisine_intent")],
+            "cuisine": [self.from_entity(entity="cuisine", intent=["request_restaurant","cuisine_intent"])],
             "budget": [
                 self.from_entity(entity="budget" , intent="budget_intent")
             ],
@@ -210,7 +210,7 @@ class RestaurantForm(FormAction):
         domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
         """Validate cuisine value."""
-
+		#print("inside validate_location..Loc retrieved",value)
         if value.lower() in self.location_db():
             # validation succeeded, set the value of the "cuisine" slot to value
             return {"location": value}

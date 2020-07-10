@@ -152,6 +152,8 @@
 - [Bokaro Steel City](location)
 - [Vasai-Virar City](location)
 - [Hubli–Dharwad](location)
+- Okay. Show me some in [Lucknow](location)
+
 
 ## regex:location
 -[a-zA-Z ]*[-]*[ a-zA-Z]*
@@ -197,6 +199,7 @@
 - looking for a table at the [mexican](cuisine) restaurant for five
 - find me a table for 7 people
 - Can I get a table for four at the place which server [greek](cuisine) food?
+- Can you suggest some good restaurants in [Rishikesh](location)
 
 ## intent:affirm
 - yeah a cheap restaurant serving international food
@@ -399,6 +402,8 @@
 - I’ll prefer [Mexican](cuisine)
 - I'll prefer [Chinese](cuisine)
 - I’ll prefer [Thai](cuisine)
+- I’ll prefer [chines](cuisine)
+
 
 ## regex:email_id
 - [A-Z0-9a-z._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}
@@ -536,3 +541,6 @@
 - madras
 - Madras
 - Chennai
+
+## synonym:chinese
+- chines
