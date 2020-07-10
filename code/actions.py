@@ -83,19 +83,19 @@ class ActionSearchRestaurants(Action):
             'south indian': 85
         }
 #        response = price + loc + cuisine
- #       dispatcher.utter_message(response)
+#        dispatcher.utter_message(response)
         ## venky/gaurav - need to get right codes for the cusines
-       # response = "Showing you top rated restaurants: \n"
+        response = "Showing you top rated restaurants: \n"
         results = zomato.restaurant_search("", lat, lon, str(cuisines_dict.get(cuisine)), 50000)
         d = json.loads(results)
-        response=""
         if d['results_found'] == 0:
             response = "No restaurant found for your criteria"
         else:
             for restaurant in sorted(d['restaurants'], key=lambda x: x['restaurant']['user_rating']['aggregate_rating'],
                                      reverse=True):
+
                 # Getting Top 10 restaurants for chatbot response
-                if ((price == 'low') and (restaurant['restaurant']['average_cost_for_two'] < 300) and (count <= 5)):
+                if ((price == 'low') and (restaurant['restaurant']['average_cost_for_two'] < 300) and (count < 5)):
                     response = response + str(count+1)+ "." + "Restaurant :: " + restaurant['restaurant']['name'] + " in " + \
                                restaurant['restaurant']['location']['address'] + " has been rated " + \
                                restaurant['restaurant']['user_rating']['aggregate_rating'] + "."
@@ -103,14 +103,14 @@ class ActionSearchRestaurants(Action):
                         restaurant['restaurant']['average_cost_for_two']) + "\n"
                     count = count + 1
                 elif ((price == 'medium') and (restaurant['restaurant']['average_cost_for_two'] >= 300) and (
-                        restaurant['restaurant']['average_cost_for_two'] <= 700) and (count <= 5)):
+                        restaurant['restaurant']['average_cost_for_two'] <= 700) and (count < 5)):
                     response = response + str(count+1) + "." + "Restaurant :: " + restaurant['restaurant']['name'] + " in " + \
                                restaurant['restaurant']['location']['address'] + " has been rated " + \
                                restaurant['restaurant']['user_rating']['aggregate_rating'] + "\n"
                     response = response + " And the average price for two people is: " + str(
                         restaurant['restaurant']['average_cost_for_two']) + "\n"
                     count = count + 1
-                elif ((price == 'high') and (restaurant['restaurant']['average_cost_for_two'] > 700) and (count <= 5)):
+                elif ((price == 'high') and (restaurant['restaurant']['average_cost_for_two'] > 700) and (count < 5)):
                     response = response + str(count+1) + "." + "Restaurant :: " + restaurant['restaurant']['name'] + " in " + \
                                restaurant['restaurant']['location']['address'] + " has been rated " + \
                                restaurant['restaurant']['user_rating']['aggregate_rating'] + "\n"
@@ -259,6 +259,7 @@ class RestaurantForm(FormAction):
         if value.lower() in self.budget_db():
             # validation succeeded, set the value of the "budget" slot to value
             budget_return=""
+#            dispatcher.utter_message(value)
             if(value == '300-700'):
                 budget_return= 'medium'
             elif(value == "less than 300"):

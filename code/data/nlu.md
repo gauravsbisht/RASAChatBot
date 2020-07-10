@@ -1,5 +1,6 @@
 ## intent:greet
 - Hi
+- Hio
 - Hey
 - Hi bot
 - Hey bot
@@ -55,7 +56,7 @@
 - [vadodara](location)
 - [varanasi](location)
 - [vasai-virar city](location)
-- [vijayawada](location)
+- [vijayawada](location)h
 - [visakhapatnam](location)
 - [vellore](location)
 - [warangal](location)
@@ -161,6 +162,22 @@
 ## intent:request_restaurant
 - im looking for a restaurant
 - I’m hungry. Looking out for some good restaurants
+- I'm hungry
+- I'm looking for good food
+- I'm looking for some good restaurants
+- I'm looking for some good food
+- I'm looking for some restaurants
+- I'm looking for food
+- I'm looking out for some good food
+- I'm looking out for some good restaurants
+- I'm looking out for some food
+- Can you help me with some good suggestions?
+- Can you help me with food?
+- I'm really hungry. need food
+- need food
+- need suggestions on good food
+- need some good restaurant names
+- can you suggest some restaurant names
 - can i get [swedish](cuisine) food in any area
 - a restaurant that serves [caribbean](cuisine) food
 - id like a restaurant
