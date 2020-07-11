@@ -3,7 +3,7 @@ bangalore
 chennai
 chennai
 delhi
-byderabad
+hyderabad
 kolkata
 mumbai
 pune

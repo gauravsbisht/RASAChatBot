@@ -48,8 +48,8 @@ class ActionSendEmail(Action):
                 s.sendmail("venkygaurav.upgrad@gmail.com", email_id, text)
             s.quit()
         ## move to a function later
-            response = "Email has been sent"
-            dispatcher.utter_message("-----" + response)
+            response = "Sent. Bon Appetit!"
+            dispatcher.utter_message(response)
         except Exception as e:
             dispatcher.utter_message('Issue in sending message \n' + str(e))
 
