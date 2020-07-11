@@ -350,3 +350,55 @@
     - slot{"email_affirm": "no"}
     - utter_goodbye
     - action_restart
+
+## interactive_story_1
+* greet
+    - utter_greet
+* request_restaurant
+    - restaurant_form
+    - form{"name": "restaurant_form"}
+    - slot{"requested_slot": "location"}
+* form: location_intent{"location": "bangalore"}
+    - form: restaurant_form
+    - slot{"location": "bangalore"}
+    - slot{"requested_slot": "cuisine"}
+* form: cuisine_intent{"cuisine": "thai"}
+    - form: restaurant_form
+    - slot{"cuisine": "thai"}
+    - slot{"requested_slot": "budget"}
+* form: budget_intent{"budget": "lesser than 300"}
+    - form: restaurant_form
+    - slot{"budget": "low"}
+    - form{"name": null}
+    - slot{"requested_slot": null}
+    - action_search_restaurants
+    - slot{"location": "bangalore"}
+    - utter_ask_continue
+* affirm
+    - action_restart
+
+## interactive_story_1
+* greet
+    - utter_greet
+* request_restaurant
+    - restaurant_form
+    - form{"name": "restaurant_form"}
+    - slot{"requested_slot": "location"}
+* form: location_intent{"location": "bangalore"}
+    - form: restaurant_form
+    - slot{"location": "bangalore"}
+    - slot{"requested_slot": "cuisine"}
+* form: cuisine_intent{"cuisine": "thai"}
+    - form: restaurant_form
+    - slot{"cuisine": "thai"}
+    - slot{"requested_slot": "budget"}
+* form: budget_intent{"budget": "lesser than 300"}
+    - form: restaurant_form
+    - slot{"budget": "low"}
+    - form{"name": null}
+    - slot{"requested_slot": null}
+    - action_search_restaurants
+    - slot{"location": "bangalore"}
+    - utter_ask_continue
+* deny
+    - action_restart

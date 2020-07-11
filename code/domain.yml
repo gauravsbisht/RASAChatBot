@@ -27,18 +27,18 @@ entities:
 forms:
 - restaurant_form
 intents:
-- budget_intent
-- email_intent
-- greet
+- deny
+- location_intent
 - request_restaurant:
     use_entities: []
-- location_intent
+- greet
 - cuisine_intent
+- budget_intent
+- affirm
+- email_intent
 - chitchat:
     use_entities: []
 - inform
-- affirm
-- deny
 - stop
 - thankyou
 - bot_challenge
