@@ -74,7 +74,9 @@ responses:
   utter_goodbye:
     - text: Bye-bye
     - text: Bon Appetit!
-
+  utter_wrong_location:
+    - text: "Sorry, we don’t operate in this city. Can you please specify some other location"
+    
 forms:
   - restaurant_form
 
