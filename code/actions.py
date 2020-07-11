@@ -122,7 +122,6 @@ class ActionSearchRestaurants(Action):
         if (count == 0):
             response = "Sorry, No results found for your criteria. Would you like to search for some other restaurants?"
             dispatcher.utter_message(response)
-            return(action_restart)
         global email_content
         email_content = response
         return [SlotSet('location', loc)]
