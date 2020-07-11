@@ -92,6 +92,8 @@ pondicherry
 purulia
 prayagraj
 raipur
+srinagar
+surat
 rajkot
 rajahmundry
 ranchi

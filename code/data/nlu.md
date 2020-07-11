@@ -56,7 +56,7 @@
 - [vadodara](location)
 - [varanasi](location)
 - [vasai-virar city](location)
-- [vijayawada](location)h
+- [vijayawada](location)
 - [visakhapatnam](location)
 - [vellore](location)
 - [warangal](location)
@@ -153,6 +153,10 @@
 - [Vasai-Virar City](location)
 - [Hubli–Dharwad](location)
 - Okay. Show me some in [Lucknow](location)
+- Okay. Show me some in [chennai](location)
+- Okay. Show me some in [Tiruchirappalli](location)
+- Okay. Show me some in [srinagar](location)
+- Okay. Show me some in [surat](location)
 
 
 ## regex:location
@@ -200,6 +204,7 @@
 - find me a table for 7 people
 - Can I get a table for four at the place which server [greek](cuisine) food?
 - Can you suggest some good restaurants in [Rishikesh](location)
+- I’m hungry. Looking out for some good [chinese](cuisine) restaurants in [chandigarh](location) 
 
 ## intent:affirm
 - yeah a cheap restaurant serving international food
@@ -413,11 +418,13 @@
 - [yes](email_affirm). Please send it to [xyz@sth.edu](email_id) 
 - [yes](email_affirm). Send to [ahbcdj@dkj.com](email_id) 
 - [yes](email_affirm). Send it to [ahbcdj@dkj.com](email_id) 
-- [yes](email_affirm).Send it to [xyz@gmail.com](email_id) 
+- [yes](email_affirm). Send to [xyz@gmail.com](email_id) 
 - [yes](email_affirm). Send it to [xyz@gmail.com](email_id) 
 - [yes](email_affirm). Send it to [xyz@gmail.com](email_id) 
 - [yes](email_affirm). Please send it to [xyz@sth.edu](email_id)
 - [no](email_affirm)
+- [no](email_affirm). Thanks
+- [no](email_affirm). thanks
 - [not needed]{"entity": "email_affirm", "value": "no"}.Please send it to [xyz@sth.edu](email_id)
 - [yes](email_confirm) please. 
 - [yes](email_affirm). Send it to [ab_sb@gmail.com](email_id)
@@ -425,6 +432,10 @@
 - [yes](email_affirm). Send it to [abcdef_test@gmail.com](email_id)
 - [yes](email_affirm). Send it to [ab.sb@gmail.com](email_id)
 - [yes](email_affirm). Send it to [peter-hans@gmail.com](email_id)
+- [jddk.2jmd@kdl.co.in](email_id)
+- [ab.sb@gmail.com](email_id)
+- [xyz_lmno@gmail.com](email_id)
+- [xyz@sth.edu](email_id)
 
 ## intent:budget_intent
 - [300-700](budget) range
@@ -435,6 +446,10 @@
 - [More than 700](budget)
 - [Lesser than 300](budget)
 - [300-700](budget) range 
+- [<300]{"entity": "budget", "value": "lesser than 300"} 
+- [>700]{"entity": "budget", "value": "more than 700"}
+- [greater than 700]{"entity": "budget", "value": "more than 700"}
+- [lesser than 300]{"entity": "budget", "value": "lesser than 300"} 
 
 ## intent:thankyou
 - um thank you good bye

@@ -53,6 +53,8 @@ responses:
     - text: "What's the average budget for two people? \n 1. Lesser than Rs. 300 \n 2. Rs. 300 to 700 \n 3. More than 700 "
   utter_ask_email:
     - text: "Should I send you details of all the restaurants on email?"
+  utter_ask_emailid:
+    - text: "To what email id should I send it to? "
   utter_noworries:
     - text: "you are welcome :)"
   utter_chitchat:

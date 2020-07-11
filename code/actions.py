@@ -42,8 +42,8 @@ class ActionSendEmail(Action):
             msg.attach(MIMEText(body, 'plain'))
             text = msg.as_string()
             s.login("venkygaurav.upgrad@gmail.com", "upgrad123")
-            response = affirm+' id : '+email_id
-            dispatcher.utter_message("-----" + response)
+          #  response = affirm+' id : '+email_id
+         #   dispatcher.utter_message("-----" + response)
             if(affirm == 'yes'):
                 s.sendmail("venkygaurav.upgrad@gmail.com", email_id, text)
             s.quit()
@@ -244,7 +244,7 @@ class RestaurantForm(FormAction):
 
         return [
             "300-700",
-            "greater than 700",
+            "more than 700",
             "lesser than 300",
         ]
     def validate_budget(
@@ -259,12 +259,12 @@ class RestaurantForm(FormAction):
         if value.lower() in self.budget_db():
             # validation succeeded, set the value of the "budget" slot to value
             budget_return=""
-#            dispatcher.utter_message(value)
+            #dispatcher.utter_message(value)
             if(value == '300-700'):
                 budget_return= 'medium'
-            elif(value == "less than 300"):
+            elif(value == "lesser than 300"):
                 budget_return = 'low'
-            elif(value == "greater than 700"):
+            elif(value == "more than 700"):
                 budget_return = 'high'
             else:
                 budget_return=None
