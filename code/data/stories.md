@@ -328,3 +328,25 @@
     - action_send_email
     - slot{"email_affirm": "yes"}
     - action_restart
+
+## interactive_story_1
+* greet
+    - utter_greet
+* request_restaurant{"cuisine": "chinese", "location": "chennai"}
+    - restaurant_form
+    - form{"name": "restaurant_form"}
+    - slot{"location": "chennai"}
+    - slot{"cuisine": "chinese"}
+    - slot{"requested_slot": "budget"}
+* form: budget_intent{"budget": "more than 700"}
+    - form: restaurant_form
+    - slot{"budget": "high"}
+    - form{"name": null}
+    - slot{"requested_slot": null}
+    - action_search_restaurants
+    - slot{"location": "chennai"}
+    - utter_ask_email
+* email_intent{"email_affirm": "no"}
+    - slot{"email_affirm": "no"}
+    - utter_goodbye
+    - action_restart

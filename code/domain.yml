@@ -27,12 +27,12 @@ entities:
 forms:
 - restaurant_form
 intents:
+- budget_intent
+- email_intent
+- greet
 - request_restaurant:
     use_entities: []
-- greet
-- email_intent
 - location_intent
-- budget_intent
 - cuisine_intent
 - chitchat:
     use_entities: []

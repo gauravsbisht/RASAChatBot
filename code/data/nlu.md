@@ -208,7 +208,7 @@
 - I'm hungry. Looking out for some good [North Indian](cuisine) restaurants in [bengaluru](location)
 - I'm hungry. Looking out for some good [Thai](cuisine) restaurants in [bengaluru](location)
 - I'm hungry. Looking out for some good [Mexican](cuisine) restaurants in [bengaluru](location)
-
+- I'm hungry. Looking for some good [chinese](cuisine) restaurants in [chennai](location)
 
 ## intent:affirm
 - yeah a cheap restaurant serving international food
@@ -359,7 +359,7 @@
 - it was [terrible](feedback)
 - i consider it [success](feedback)
 - you are [awful](feedback)
-- I'm hungry. Looking for good 
+- I'm hungry. Looking for good
 
 ## intent:cuisine_intent
 - I'll prefer [thai](cuisine)
@@ -384,7 +384,6 @@
 - I'll prefer [Chinese](cuisine)
 - I’ll prefer [Thai](cuisine)
 - I’ll prefer [chines](cuisine)
-- [american](cuisine)
 
 ## intent:email_intent
 - [yes](email_affirm). Please send it to [ahbcdj@dkj.com](email_id)
@@ -397,15 +396,13 @@
 - [no](email_affirm)
 - [no](email_affirm). Thanks
 - [no](email_affirm). thanks
-- [not needed]{"entity": "email_affirm", "value": "no"}. 
+- [not needed]{"entity": "email_affirm", "value": "no"}.
 - [yes](email_affirm) please.
 - [yes](email_affirm). please.
 - [yes](email_affirm). Please
 - [no. thanks]{"entity": "email_affirm", "value": "no"}
 - [no.thanks]{"entity": "email_affirm", "value": "no"}
 - [no](email_affirm).thanks
-- [no](email_affirm).
-- [no](email_affirm)
 - [yes](email_affirm). Send it to [ab_sb@gmail.com](email_id)
 - [yes](email_affirm). Send it to [xyz_lmno@gmail.com](email_id)
 - [yes](email_affirm). Send it to [abcdef_test@gmail.com](email_id)
@@ -415,10 +412,8 @@
 - [ab.sb@gmail.com](email_id)
 - [xyz_lmno@gmail.com](email_id)
 - [xyz@sth.edu](email_id)
-- [yes](email_affirm). Please
 - [jddk.2jm@kdl.co.in](email_id)
-- [yes](email_affirm). Please
-- [jddk.2jmd@kdl.co.in](email_id)
+- [no](email_affirm)
 
 ## intent:budget_intent
 - [300-700](budget) range
@@ -431,7 +426,7 @@
 - [<300]{"entity": "budget", "value": "lesser than 300"}
 - [>700]{"entity": "budget", "value": "more than 700"}
 - [greater than 700]{"entity": "budget", "value": "more than 700"}
-- [<300]{"entity": "budget", "value": "lesser than 300"}
+- [>700]{"entity": "budget", "value": "more than 700"}
 
 ## intent:thankyou
 - um thank you good bye
@@ -559,6 +554,8 @@
 
 ## synonym:no
 - not needed
+- no. thanks
+- no.thanks
 
 ## regex:email_id
 - [A-Z0-9a-z._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}
