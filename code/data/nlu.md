@@ -29,9 +29,8 @@
 - hey bot!
 - hello friend
 
-## intent: location_intent
+## intent:location_intent
 - in [bangalore](location)
-- in [bangalore]{"entity": "location", "value": "bangalore"}
 - [bangalore](location)
 - [bengaluru]{"entity": "location", "value": "bangalore"}
 - in [bengaluru]{"entity": "location", "value": "bangalore"}
@@ -40,12 +39,10 @@
 - [chennai](location)
 - in [chennai](location)
 - [Chennai](location)
-- [Chennai](location)
 - [Madras]{"entity": "location", "value": "chennai"}
 - [Tiruchirappalli](location)
 - [Bokaro Steel City](location)
 - [Vasai-Virar City](location)
-- [Hubli–Dharwad](location)
 - [Hubli–Dharwad](location)
 - [thiruvananthapuram](location)
 - [thrissur](location)
@@ -144,26 +141,23 @@
 - [srinagar](location)
 - [surat](location)
 - in [nagercoil](location)
-- [nagercoil](location)
-- [chennai](location)
-- in [chennai](location)
-- [Chennai](location)
-- [Tiruchirappalli](location)
-- [Bokaro Steel City](location)
-- [Vasai-Virar City](location)
-- [Hubli–Dharwad](location)
 - Okay. Show me some in [Lucknow](location)
 - Okay. Show me some in [chennai](location)
 - Okay. Show me some in [Tiruchirappalli](location)
 - Okay. Show me some in [srinagar](location)
 - Okay. Show me some in [surat](location)
-
-
-## regex:location
--[a-zA-Z ]*[-]*[ a-zA-Z]*
-
-## regex:pincode
-- [0-9]{6}
+- Okay. Show me some in [bangalore](location)
+- Okay. Show me some in [ahmedabad](location)
+- Okay. Show me some in [delhi](location)
+- Okay. Show me some in [hyderabad](location)
+- Okay. Show me some in [pune](location)
+- Okay. Show me some in [thiruvananthapuram](location)
+- Okay. Show me some in [tiruchirappalli](location)
+- Okay. Show me some in [tiruppur](location)
+- Okay. Show me some in [ujjain](location)
+- Okay. Show me some in [bijapur](location)
+- in [mubaim](location)
+- in [Mumbai](location)
 
 ## intent:request_restaurant
 - im looking for a restaurant
@@ -204,7 +198,17 @@
 - find me a table for 7 people
 - Can I get a table for four at the place which server [greek](cuisine) food?
 - Can you suggest some good restaurants in [Rishikesh](location)
-- I’m hungry. Looking out for some good [chinese](cuisine) restaurants in [chandigarh](location) 
+- I’m hungry. Looking out for some good [chinese](cuisine) restaurants in [chandigarh](location)
+- can you suggest some good restaurants in [kolkata](location)
+- I'm hungry. Looking out for some good [chinese](cuisine) restaurants in [chennai](location)
+- I'm hungry. Looking out for some good [North Indian](cuisine) restaurants in [chennai](location)
+- I'm hungry. Looking out for some good [Thai](cuisine) restaurants in [chennai](location)
+- I'm hungry. Looking out for some good [Mexican](cuisine) restaurants in [chennai](location)
+- I'm hungry. Looking out for some good [chinese](cuisine) restaurants in [bengaluru](location)
+- I'm hungry. Looking out for some good [North Indian](cuisine) restaurants in [bengaluru](location)
+- I'm hungry. Looking out for some good [Thai](cuisine) restaurants in [bengaluru](location)
+- I'm hungry. Looking out for some good [Mexican](cuisine) restaurants in [bengaluru](location)
+
 
 ## intent:affirm
 - yeah a cheap restaurant serving international food
@@ -213,7 +217,6 @@
 - uh yes
 - let's do it
 - yeah
-- uh yes
 - um yes
 - yes knocking
 - that's correct
@@ -252,7 +255,7 @@
 - um what about [italian](cuisine) food
 - im looking for [corsica](cuisine) food
 - im looking for [world](cuisine) food
--  serves [french](cuisine) food
+- serves [french](cuisine) food
 - how about [indian](cuisine) food
 - can i get [chinese](cuisine) food
 - [irish](cuisine) food
@@ -262,7 +265,7 @@
 - [german](cuisine)
 - [korean](cuisine) food
 - im looking for [romanian](cuisine) food
--  serves [canapes](cuisine) food
+- serves [canapes](cuisine) food
 - [gastropub](cuisine)
 - i want [french](cuisine) food
 - how about [modern european](cuisine) type of food
@@ -295,20 +298,20 @@
 - im looking for [belgian](cuisine) food
 - im looking for [turkish](cuisine) food
 - serving [corsica](cuisine) food
-- serving [gastro pub](cuisine:gastropub)
+- serving [gastro pub]{"entity": "cuisine", "value": "gastropub"}
 - is there [british](cuisine) food
 - [world](cuisine) food
 - im looking for something serves [japanese](cuisine) food
 - id like a [greek](cuisine)
 - im looking for [malaysian](cuisine) food
 - i want to find [world](cuisine) food
-- serves [pan asian](cuisine:asian) food
+- serves [pan asian]{"entity": "cuisine", "value": "asian"} food
 - looking for [afghan](cuisine) food
 - that serves [portuguese](cuisine) food
-- [asian oriental](cuisine:asian) food
+- [asian oriental]{"entity": "cuisine", "value": "asian"} food
 - [russian](cuisine) food
 - [corsica](cuisine)
-- [asian oriental](cuisine:asian)
+- [asian oriental]{"entity": "cuisine", "value": "asian"}
 - serving [basque](cuisine) food
 - how about [italian](cuisine)
 - looking for [spanish](cuisine) food in the center of town
@@ -317,7 +320,6 @@
 - i want [vegetarian](cuisine) food
 - im looking for [swedish](cuisine) food
 - um how about [chinese](cuisine) food
-- [world](cuisine) food
 - can i have a [seafood](cuisine) please
 - how about [italian](cuisine) food
 - how about [korean](cuisine)
@@ -330,7 +332,6 @@
 - [tuscan](cuisine) food
 - how about uh [gastropub](cuisine)
 - im looking for [creative](cuisine) food
-- im looking for [malaysian](cuisine) food
 - im looking for [unusual](cuisine) food
 - [danish](cuisine) food
 - how about [spanish](cuisine) food
@@ -358,33 +359,8 @@
 - it was [terrible](feedback)
 - i consider it [success](feedback)
 - you are [awful](feedback)
-- for ten people
-- 2 people
-- for three people
-- just one person
-- book for seven people
-- 2 please
-- nine people
+- I'm hungry. Looking for good 
 
-## intent:cuisine_intent
-- I'll prefer [thai](cuisine)
-- [thai](cuisine)
-- [italian](cuisine)
-- [Italian](cuisine)
-- [mexican](cuisine)
-- [Mexican](cuisine)
-- [Thai](cuisine)
-- [chinese](cuisine)
-- [Chinese](cuisine)
-- I'll prefer [chinese](cuisine)
-- [American](cuisine)
-- [american](cuisine)
-- I'll prefer [North Indian](cuisine)
-- [North Indian](cuisine)
-- [north indian](cuisine)
-- I'll prefer [American](cuisine)
-- [kongani](cuisine)
-- [swedish](cuisine)
 ## intent:cuisine_intent
 - I'll prefer [thai](cuisine)
 - [thai](cuisine)
@@ -408,25 +384,28 @@
 - I'll prefer [Chinese](cuisine)
 - I’ll prefer [Thai](cuisine)
 - I’ll prefer [chines](cuisine)
+- [american](cuisine)
 
-
-## regex:email_id
-- [A-Z0-9a-z._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}
 ## intent:email_intent
-- [yes](email_affirm). Please send it to [ahbcdj@dkj.com](email_id) 
-- [no](email_affirm). 
-- [yes](email_affirm). Please send it to [xyz@sth.edu](email_id) 
-- [yes](email_affirm). Send to [ahbcdj@dkj.com](email_id) 
-- [yes](email_affirm). Send it to [ahbcdj@dkj.com](email_id) 
-- [yes](email_affirm). Send to [xyz@gmail.com](email_id) 
-- [yes](email_affirm). Send it to [xyz@gmail.com](email_id) 
-- [yes](email_affirm). Send it to [xyz@gmail.com](email_id) 
+- [yes](email_affirm). Please send it to [ahbcdj@dkj.com](email_id)
+- [no](email_affirm).
 - [yes](email_affirm). Please send it to [xyz@sth.edu](email_id)
+- [yes](email_affirm). Send to [ahbcdj@dkj.com](email_id)
+- [yes](email_affirm). Send it to [ahbcdj@dkj.com](email_id)
+- [yes](email_affirm). Send to [xyz@gmail.com](email_id)
+- [yes](email_affirm). Send it to [xyz@gmail.com](email_id)
 - [no](email_affirm)
 - [no](email_affirm). Thanks
 - [no](email_affirm). thanks
-- [not needed]{"entity": "email_affirm", "value": "no"}.Please send it to [xyz@sth.edu](email_id)
-- [yes](email_confirm) please. 
+- [not needed]{"entity": "email_affirm", "value": "no"}. 
+- [yes](email_affirm) please.
+- [yes](email_affirm). please.
+- [yes](email_affirm). Please
+- [no. thanks]{"entity": "email_affirm", "value": "no"}
+- [no.thanks]{"entity": "email_affirm", "value": "no"}
+- [no](email_affirm).thanks
+- [no](email_affirm).
+- [no](email_affirm)
 - [yes](email_affirm). Send it to [ab_sb@gmail.com](email_id)
 - [yes](email_affirm). Send it to [xyz_lmno@gmail.com](email_id)
 - [yes](email_affirm). Send it to [abcdef_test@gmail.com](email_id)
@@ -436,6 +415,10 @@
 - [ab.sb@gmail.com](email_id)
 - [xyz_lmno@gmail.com](email_id)
 - [xyz@sth.edu](email_id)
+- [yes](email_affirm). Please
+- [jddk.2jm@kdl.co.in](email_id)
+- [yes](email_affirm). Please
+- [jddk.2jmd@kdl.co.in](email_id)
 
 ## intent:budget_intent
 - [300-700](budget) range
@@ -445,11 +428,10 @@
 - [more than 700](budget)
 - [More than 700](budget)
 - [Lesser than 300](budget)
-- [300-700](budget) range 
-- [<300]{"entity": "budget", "value": "lesser than 300"} 
+- [<300]{"entity": "budget", "value": "lesser than 300"}
 - [>700]{"entity": "budget", "value": "more than 700"}
 - [greater than 700]{"entity": "budget", "value": "more than 700"}
-- [lesser than 300]{"entity": "budget", "value": "lesser than 300"} 
+- [<300]{"entity": "budget", "value": "lesser than 300"}
 
 ## intent:thankyou
 - um thank you good bye
@@ -546,16 +528,43 @@
 - am I talking to a bot?
 - am I talking to a human?
 
+## synonym:asian
+- pan asian
+- asian oriental
+
 ## synonym:bangalore
 - bengaluru
+- nagercoil
 - Bangalore
 - Bengaluru
 - bangalore
 
 ## synonym:chennai
-- madras
 - Madras
+- madras
 - Chennai
 
 ## synonym:chinese
 - chines
+
+## synonym:gastropub
+- gastro pub
+
+## synonym:lesser than 300
+- <300
+
+## synonym:more than 700
+- >700
+- greater than 700
+
+## synonym:no
+- not needed
+
+## regex:email_id
+- [A-Z0-9a-z._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}
+
+## regex:location
+- [a-zA-Z ]*[-]*[ a-zA-Z]*
+
+## regex:pincode
+- [0-9]{6}

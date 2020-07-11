@@ -15,7 +15,26 @@
     - utter_goodbye
 	- action_restart
 	- utter_restart
-## happy path
+## happy path2
+* greet
+    - utter_greet
+* request_restaurant
+    - restaurant_form
+    - form{"name": "restaurant_form"}
+    - form{"name": null}
+    - action_search_restaurants
+    - utter_ask_email
+* email_intent{"email_affirm":"yes"}
+    - slot{"email_affirm":"yes"}
+    - utter_ask_emailid
+* email_intent{"email_id":"jddk.2jmd@kdl.co.in"}
+    - slot{"email_id":"jddk.2jmd@kdl.co.in "}
+    - action_send_email
+* thankyou
+    - utter_goodbye
+	- action_restart
+	- utter_restart
+## happy path3
 * greet
     - utter_greet
 * request_restaurant{"cuisine":"chinese", "location":"chandigarh"}
@@ -32,7 +51,7 @@
     - utter_goodbye
 	- action_restart
 	- utter_restart
-## happy path
+## happy path4
 * greet
     - utter_greet
 * request_restaurant{"cuisine":"chinese", "location":"chandigarh"}
@@ -45,7 +64,7 @@
     - utter_goodbye
 	- action_restart
 	- utter_restart
-## happy path
+## happy path5
 * request_restaurant
     - restaurant_form
     - form{"name": "restaurant_form"}
@@ -60,7 +79,7 @@
     - utter_goodbye
 	- action_restart
 	- utter_restart
-## happy path1
+## happy path6
 * greet
     - utter_greet
 * request_restaurant
@@ -138,9 +157,6 @@
     - utter_ask_continue
 * affirm
     - restaurant_form
-* chitchat
-    - utter_chitchat
-    - restaurant_form
     - form{"name": null}
 * thankyou
     - utter_goodbye
@@ -187,3 +203,128 @@
     - utter_goodbye
 	- action_restart
 	- utter_restart
+
+## interactive_story_1
+* greet
+    - utter_greet
+* request_restaurant{"location": "kolkata"}
+    - restaurant_form
+    - form{"name": "restaurant_form"}
+    - slot{"location": "kolkata"}
+    - slot{"requested_slot": "cuisine"}
+* form: cuisine_intent{"cuisine": "american"}
+    - form: restaurant_form
+    - slot{"cuisine": "american"}
+    - slot{"requested_slot": "budget"}
+* form: budget_intent{"budget": "more than 700"}
+    - form: restaurant_form
+    - slot{"budget": "high"}
+    - form{"name": null}
+    - slot{"requested_slot": null}
+    - action_search_restaurants
+    - slot{"location": "kolkata"}
+    - utter_ask_email
+* email_intent{"email_affirm": "yes"}
+    - slot{"email_affirm": "yes"}
+    - utter_ask_emailid
+* email_intent{"email_id": "jddk.2jmd@kdl.co.in"}
+    - slot{"email_id": "jddk.2jmd@kdl.co.in"}
+    - action_send_email
+    - slot{"email_affirm": "yes"}
+    - utter_goodbye
+    - action_restart
+
+## interactive_story_1
+* greet
+    - utter_greet
+* request_restaurant{"location": "kolkata"}
+    - restaurant_form
+    - form{"name": "restaurant_form"}
+    - slot{"location": "kolkata"}
+    - slot{"requested_slot": "cuisine"}
+* form: cuisine_intent{"cuisine": "american"}
+    - form: restaurant_form
+    - slot{"cuisine": "american"}
+    - slot{"requested_slot": "budget"}
+* form: budget_intent{"budget": "lesser than 300"}
+    - form: restaurant_form
+    - slot{"budget": "low"}
+    - form{"name": null}
+    - slot{"requested_slot": null}
+    - action_search_restaurants
+    - slot{"location": "kolkata"}
+    - utter_ask_email
+* email_intent{"email_affirm": "yes"}
+    - slot{"email_affirm": "yes"}
+    - utter_ask_emailid
+* email_intent{"email_id": "jddk.2jm@kdl.co.in"}
+    - slot{"email_id": "jddk.2jm@kdl.co.in"}
+    - action_send_email
+    - slot{"email_affirm": "yes"}
+    - utter_goodbye
+    - action_restart
+
+## interactive_story_1
+* greet
+    - utter_greet
+* request_restaurant{"location": "kolkata"}
+    - restaurant_form
+    - form{"name": "restaurant_form"}
+    - slot{"location": "kolkata"}
+    - slot{"requested_slot": "cuisine"}
+* form: cuisine_intent{"cuisine": "american"}
+    - form: restaurant_form
+    - slot{"cuisine": "american"}
+    - slot{"requested_slot": "budget"}
+* form: budget_intent{"budget": "lesser than 300"}
+    - form: restaurant_form
+    - slot{"budget": "low"}
+    - form{"name": null}
+    - slot{"requested_slot": null}
+    - action_search_restaurants
+    - slot{"location": "kolkata"}
+    - utter_ask_email
+* email_intent{"email_affirm": "yes"}
+    - slot{"email_affirm": "yes"}
+    - utter_ask_emailid
+* email_intent{"email_id": "jddk.2jmd@kdl.co.in"}
+    - slot{"email_id": "jddk.2jmd@kdl.co.in"}
+    - action_send_email
+    - slot{"email_affirm": "yes"}
+    - action_restart
+
+## interactive_story_1
+* greet
+    - utter_greet
+* request_restaurant
+    - restaurant_form
+    - form{"name": "restaurant_form"}
+    - slot{"requested_slot": "location"}
+* form: location_intent{"location": "mubaim"}
+    - form: restaurant_form
+    - slot{"location": null}
+    - slot{"requested_slot": "location"}
+* form: location_intent{"location": "Mumbai"}
+    - form: restaurant_form
+    - slot{"location": "Mumbai"}
+    - slot{"requested_slot": "cuisine"}
+* form: cuisine_intent{"cuisine": "american"}
+    - form: restaurant_form
+    - slot{"cuisine": "american"}
+    - slot{"requested_slot": "budget"}
+* form: budget_intent{"budget": "lesser than 300"}
+    - form: restaurant_form
+    - slot{"budget": "low"}
+    - form{"name": null}
+    - slot{"requested_slot": null}
+    - action_search_restaurants
+    - slot{"location": "Mumbai"}
+    - utter_ask_email
+* email_intent{"email_affirm": "yes"}
+    - slot{"email_affirm": "yes"}
+    - utter_ask_emailid
+* email_intent{"email_id": "jddk.2jmd@kdl.co.in"}
+    - slot{"email_id": "jddk.2jmd@kdl.co.in"}
+    - action_send_email
+    - slot{"email_affirm": "yes"}
+    - action_restart
