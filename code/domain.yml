@@ -5,7 +5,6 @@ actions:
 - utter_ask_continue
 - utter_ask_cuisine
 - utter_ask_email
-- utter_ask_email_affirm
 - utter_ask_email_id
 - utter_ask_location
 - utter_chitchat
@@ -29,17 +28,17 @@ forms:
 - email_form
 - restaurant_form
 intents:
+- cuisine_intent
+- greet
+- email_id_intent
 - email_affirm_intent
+- budget_intent
 - request_restaurant:
     use_entities: []
-- greet
-- cuisine_intent
-- location_intent
 - thankyou
-- budget_intent
+- location_intent
 - deny
 - affirm
-- email_id_intent
 - chitchat:
     use_entities: []
 - inform

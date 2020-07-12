@@ -158,7 +158,7 @@
 - Okay. Show me some in [bijapur](location)
 - in [mubaim](location)
 - in [Mumbai](location)
-- [chennai](location)
+- Okay. Show me some in [Surat](location)
 
 ## intent:request_restaurant
 - im looking for a restaurant
@@ -211,6 +211,7 @@
 - I'm hungry. Looking out for some good [Mexican](cuisine) restaurants in [bengaluru](location)
 - I'm hungry. Looking for some good [chinese](cuisine) restaurants in [chennai](location)
 - I'm hungry. Looking for some good restaurants
+- Can you suggest some good restaurants in [kolkata](location)
 
 ## intent:affirm
 - yeah a cheap restaurant serving international food
@@ -386,7 +387,8 @@
 - I'll prefer [Chinese](cuisine)
 - I’ll prefer [Thai](cuisine)
 - I’ll prefer [chines](cuisine)
-- [North Indian](cuisine)
+- I'll prefer [chines]{"entity": "cuisine", "value": "chinese"}
+- [american](cuisine)
 
 ## intent:email_affirm_intent
 - [yes](email_affirm). Please send it to [ahbcdj@dkj.com](email_id)
@@ -417,6 +419,7 @@
 - [xyz@sth.edu](email_id)
 - [jddk.2jm@kdl.co.in](email_id)
 - [yes](email_affirm). Send it to [venkateshan@gmail.com](email_id)
+- [yes](email_affirm). Please
 
 ## intent:email_id_intent
 - [ahbcdj@dkj.com](email_id)
@@ -426,6 +429,8 @@
 - [ab.sb@gmail.com](email_id)
 - [xyz_lmno@gmail.com](email_id)
 - [jddk.2jm@kdl.co.in](email_id)
+- [jddk.2jmd@kdl.co.in](email_id)
+- [venkateshan@gmail.com](email_id)
 
 ## intent:budget_intent
 - [300-700](budget) range
@@ -438,7 +443,7 @@
 - [<300]{"entity": "budget", "value": "lesser than 300"}
 - [>700]{"entity": "budget", "value": "more than 700"}
 - [greater than 700]{"entity": "budget", "value": "more than 700"}
-- [300-700](budget)
+- [<300]{"entity": "budget", "value": "lesser than 300"}
 
 ## intent:thankyou
 - um thank you good bye

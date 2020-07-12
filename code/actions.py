@@ -17,7 +17,7 @@ from rasa_sdk import Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormAction
 # import pandas as pd
-
+import re
 
 email_content=""
 
@@ -350,9 +350,19 @@ class EmailForm(FormAction):
         domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
         """Validate email_id"""
+        pattern = "(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
+        if value is not None:
+            if re.search("(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", value):
+                email_id_good = True
+                return {"email_id": value}
+            else:
+                dispatcher.utter_message("Sorry this is not a valid email. please check for typing errors")
+                return {"email_id", None}
+        else:
+            dispatcher.utter_message(
+                "Sorry I could not understand the email address which you provided? Please provide again")
+            return {"email_id": None}
 
-        return {"email_id": value}
-       
     def submit(
         self,
         dispatcher: CollectingDispatcher,
