@@ -127,6 +127,42 @@ class ActionSearchRestaurants(Action):
             dispatcher.utter_message(response)
             evt = {"event": "restart"}
             return[evt]
+
+        ## top 10 results for mailing
+        response=""
+        count = 0
+        response = "Showing you top rated restaurants: \n"
+        results = zomato.restaurant_search("", lat, lon, str(cuisines_dict.get(cuisine)), 50000)
+        d = json.loads(results)
+        if d['results_found'] == 0:
+            response = "No restaurant found for your criteria"
+        else:
+            for restaurant in sorted(d['restaurants'], key=lambda x: x['restaurant']['user_rating']['aggregate_rating'],
+                                     reverse=True):
+
+                # Getting Top 10 restaurants for chatbot response
+                if ((price == 'low') and (restaurant['restaurant']['average_cost_for_two'] < 300) and (count < 10)):
+                    response = response + str(count+1)+ "." + "Restaurant :: " + restaurant['restaurant']['name'] + " in " + \
+                               restaurant['restaurant']['location']['address'] + " has been rated " + \
+                               restaurant['restaurant']['user_rating']['aggregate_rating'] + "."
+                    response = response + " And the average price for two people is: " + str(
+                        restaurant['restaurant']['average_cost_for_two']) + "\n"
+                    count = count + 1
+                elif ((price == 'medium') and (restaurant['restaurant']['average_cost_for_two'] >= 300) and (
+                        restaurant['restaurant']['average_cost_for_two'] <= 700) and (count < 10)):
+                    response = response + str(count+1) + "." + "Restaurant :: " + restaurant['restaurant']['name'] + " in " + \
+                               restaurant['restaurant']['location']['address'] + " has been rated " + \
+                               restaurant['restaurant']['user_rating']['aggregate_rating'] + "\n"
+                    response = response + " And the average price for two people is: " + str(
+                        restaurant['restaurant']['average_cost_for_two']) + "\n"
+                    count = count + 1
+                elif ((price == 'high') and (restaurant['restaurant']['average_cost_for_two'] > 700) and (count < 10)):
+                    response = response + str(count+1) + "." + "Restaurant :: " + restaurant['restaurant']['name'] + " in " + \
+                               restaurant['restaurant']['location']['address'] + " has been rated " + \
+                               restaurant['restaurant']['user_rating']['aggregate_rating'] + "\n"
+                    response = response + " And the average price for two people is: " + str(
+                        restaurant['restaurant']['average_cost_for_two']) + "\n"
+                    count = count + 1
         global email_content
         email_content = response
         return [SlotSet('location', loc)]
