@@ -123,8 +123,10 @@ class ActionSearchRestaurants(Action):
         if (count <= 5 and count > 0):
             dispatcher.utter_message(response)
         if (count == 0):
-            response = "Sorry, No results found for your criteria. Would you like to search for some other restaurants?"
+            response = "Sorry, No results found for your criteria. We shall restart the search"
             dispatcher.utter_message(response)
+            evt = {"event": "restart"}
+            return[evt]
         global email_content
         email_content = response
         return [SlotSet('location', loc)]
