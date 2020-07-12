@@ -61,7 +61,7 @@ class ActionSearchRestaurants(Action):
         return 'action_search_restaurants'
 
     def run(self, dispatcher, tracker, domain):
-        print("In action search restaurant")
+     #   print("In action search restaurant")
 
         count = 0
         config = {"user_key": "128343527e861a0747f3baf1c0d09ba6"}
@@ -189,7 +189,7 @@ class RestaurantForm(FormAction):
             - intent: value pairs
             - a whole message
             or a list of them, where a first match will be picked"""
-        print("Inside Slot Mapping for RestaurantForm")
+        #print("Inside Slot Mapping for RestaurantForm")
         return {
             "location": [
                 self.from_entity(
@@ -341,8 +341,10 @@ class EmailForm(FormAction):
     @staticmethod
     def required_slots(tracker: Tracker) -> List[Text]:
         """A list of required slots that the form has to fill"""
-
-        return ["email_affirm", "email_id"]
+        if tracker.get_slot("email_affirm")=="no":
+            return ["email_affirm"]
+        else:
+            return ["email_affirm", "email_id"]
 
     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
         """A dictionary to map required slots to
@@ -377,6 +379,7 @@ class EmailForm(FormAction):
     ) -> Dict[Text, Any]:
         """Validate email_affirm"""
         print("inside validate_email_affirm..Value",value)
+
         return {"email_affirm": value}
         
     # USED FOR DOCS: do not rename without updating in docs
@@ -388,7 +391,9 @@ class EmailForm(FormAction):
         domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
         """Validate email_id"""
+        print("inside validate_email_id:  Value", value)
         pattern = "(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
+
         if value is not None:
             if re.search("(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", value):
                 email_id_good = True

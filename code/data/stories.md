@@ -162,3 +162,54 @@
     - action_send_email
     - slot{"email_affirm": "yes"}
     - action_restart
+
+## interactive_story_1
+* greet
+    - utter_greet
+* request_restaurant{"cuisine": "chinese", "location": "chandigarh"}
+    - restaurant_form
+    - form{"name": "restaurant_form"}
+    - slot{"location": "chandigarh"}
+    - slot{"cuisine": "chinese"}
+    - slot{"requested_slot": "budget"}
+* form: budget_intent{"budget": "300-700"}
+    - form: restaurant_form
+    - slot{"budget": "medium"}
+    - form{"name": null}
+    - slot{"requested_slot": null}
+    - action_search_restaurants
+    - slot{"location": "chandigarh"}
+    - utter_ask_email
+* email_affirm_intent{"email_affirm": "no"}
+    - slot{"email_affirm": "no"}
+    - email_form
+    - form{"name": "email_form"}
+    - slot{"email_affirm": "no"}
+    - slot{"email_affirm": "no"}
+    - slot{"requested_slot": "email_id"}
+    - utter_goodbye
+    - utter_restart
+    - action_restart
+
+## interactive_story_1
+* greet
+    - utter_greet
+* request_restaurant{"cuisine": "chinese", "location": "Chandigarh"}
+    - restaurant_form
+    - form{"name": "restaurant_form"}
+    - slot{"location": "Chandigarh"}
+    - slot{"cuisine": "chinese"}
+    - slot{"requested_slot": "budget"}
+* form: budget_intent{"budget": "300-700"}
+    - form: restaurant_form
+    - slot{"budget": "medium"}
+    - form{"name": null}
+    - slot{"requested_slot": null}
+    - action_search_restaurants
+    - slot{"location": "Chandigarh"}
+    - utter_ask_email
+* email_affirm_intent{"email_affirm": "no"}
+    - slot{"email_affirm": "no"}
+    - utter_goodbye
+    - utter_restart
+    - action_restart
