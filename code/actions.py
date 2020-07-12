@@ -400,7 +400,7 @@ class EmailForm(FormAction):
                 return {"email_id": value}
             else:
                 dispatcher.utter_message("Sorry this is not a valid email. please check for typing errors")
-                return {"email_id", None}
+                return {"email_id": None}
         else:
             dispatcher.utter_message(
                 "Sorry I could not understand the email address which you provided? Please provide again")
