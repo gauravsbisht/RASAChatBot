@@ -213,3 +213,39 @@
     - utter_goodbye
     - utter_restart
     - action_restart
+
+## interactive_story_1
+* request_restaurant
+    - utter_ask_location
+* location_intent{"location": "chennai"}
+    - restaurant_form
+    - form{"name": "restaurant_form"}
+    - slot{"location": "chennai"}
+    - slot{"requested_slot": "cuisine"}
+* form: cuisine_intent{"cuisine": "chinese"}
+    - form: restaurant_form
+    - slot{"cuisine": "chinese"}
+    - slot{"requested_slot": "budget"}
+* form: budget_intent{"budget": "300-700"}
+    - form: restaurant_form
+    - slot{"budget": "medium"}
+    - form{"name": null}
+    - slot{"requested_slot": null}
+    - action_search_restaurants
+    - slot{"location": "chennai"}
+    - utter_ask_email
+* email_affirm_intent{"email_affirm": "yes", "email_id": "venkateshan@gmail.com"}
+    - slot{"email_affirm": "yes"}
+    - slot{"email_id": "venkateshan@gmail.com"}
+    - email_form
+    - form{"name": "email_form"}
+    - slot{"email_affirm": "yes"}
+    - slot{"email_id": "venkateshan@gmail.com"}
+    - slot{"email_affirm": "yes"}
+    - slot{"email_id": "venkateshan@gmail.com"}
+    - form{"name": null}
+    - slot{"requested_slot": null}
+    - action_send_email
+    - slot{"email_affirm": "yes"}
+* thankyou
+    - action_restart

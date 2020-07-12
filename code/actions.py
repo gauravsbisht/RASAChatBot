@@ -125,6 +125,8 @@ class ActionSearchRestaurants(Action):
         if (count == 0):
             response = "Sorry, No results found for your criteria. We shall restart the search"
             dispatcher.utter_message(response)
+            print("Restarting as no results found")
+
             evt = {"event": "restart"}
             return[evt]
 

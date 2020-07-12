@@ -28,16 +28,15 @@ forms:
 - email_form
 - restaurant_form
 intents:
-- cuisine_intent
-- greet
-- email_id_intent
-- email_affirm_intent
 - budget_intent
+- cuisine_intent
+- thankyou
 - request_restaurant:
     use_entities: []
-- thankyou
 - location_intent
-- deny
+- email_affirm_intent
+- greet
+- email_id_intent
 - affirm
 - chitchat:
     use_entities: []
@@ -79,8 +78,7 @@ responses:
   utter_wrong_cuisine:
   - text: Cuisine type is not in the database, please try again
   utter_wrong_location:
-  - text: Sorry, we don’t operate in this city. Please specify some other
-      location
+  - text: Sorry, we don’t operate in this city. Please specify some other location
 session_config:
   carry_over_slots_to_new_session: true
   session_expiration_time: 60

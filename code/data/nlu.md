@@ -29,6 +29,10 @@
 - hey bot!
 - hello friend
 - Hello!
+- Hi how are you
+- Hi how are you?
+- Hi. How are you
+- Hi. How are you?
 
 ## intent:location_intent
 - in [bangalore](location)
@@ -70,6 +74,8 @@
 - [bhavnagar](location)
 - [bhiwandi](location)
 - [bhopal](location)
+- [hyderabad](location)
+- [hydrabad]{"entity": "location", "value": "hyderabad"}
 - [bhubaneswar](location)
 - [bikaner](location)
 - [bilaspur](location)
@@ -160,6 +166,7 @@
 - in [mubaim](location)
 - in [Mumbai](location)
 - Okay. Show me some in [Surat](location)
+- [chennai](location)
 
 ## intent:request_restaurant
 - im looking for a restaurant
@@ -215,6 +222,7 @@
 - Can you suggest some good restaurants in [kolkata](location)
 - I'm hungry. Looking out for some good [chinese](cuisine) restaurants in [chandigarh](location)
 - I'm hungry. Looking out for some good [chinese](cuisine) restaurants in [Chandigarh](location)
+- i m hungry
 
 ## intent:affirm
 - yeah a cheap restaurant serving international food
@@ -310,6 +318,7 @@
 - [asian oriental]{"entity": "cuisine", "value": "asian"}
 - serving [basque](cuisine) food
 - how about [italian](cuisine)
+- how about [itaLIAn](cuisine)
 - looking for [spanish](cuisine) food in the center of town
 - it should serve [gastropub](cuisine) food
 - [welsh](cuisine) food
@@ -381,10 +390,19 @@
 - I’ll prefer [Thai](cuisine)
 - I’ll prefer [chines](cuisine)
 - I'll prefer [chines]{"entity": "cuisine", "value": "chinese"}
+- [italiAN](cuisine)
+- [ITALIAN](cuisine)
+- [iTAlian](cuisine)
+- [thAI](cuisine)
+- [chinese](cuisine)
 
 ## intent:email_affirm_intent
 - [yes](email_affirm). Please send it to [ahbcdj@dkj.com](email_id)
 - [no](email_affirm).
+- [yes](email_affirm)
+- [yes](email_affirm) please
+- [yes](email_affirm). please do
+- [yes](email_affirm). please send
 - [no](email_affirm). thanks
 - [yes](email_affirm). Please send it to [xyz@sth.edu](email_id)
 - [yes](email_affirm). Send to [ahbcdj@dkj.com](email_id)
@@ -413,7 +431,9 @@
 - [yes](email_affirm). Send it to [venkateshan@gmail.com](email_id)
 - [yes](email_affirm). Send it to [venkateshan@gmail.om](email_id)
 - [yes](email_affirm). Please send it to [venkateshan@gmail.om](email_id)
-- [no](email_affirm). thanks
+- [yes](email_affirm). please send it to [venkateshan@gmail.com](email_id)
+- [yes](email_affirm). please send it to [gaurav_sbist@yahoo.com](email_id)
+- [yes](email_affirm). Please send to [gaurav_sbist@yahoo.com](email_id)
 
 ## intent:email_id_intent
 - [ahbcdj@dkj.com](email_id)
@@ -424,6 +444,7 @@
 - [xyz_lmno@gmail.com](email_id)
 - [jddk.2jm@kdl.co.in](email_id)
 - [venkateshan@gmail.com](email_id)
+- [gaurav_sbist@yahoo.com](email_id)
 
 ## intent:budget_intent
 - [300-700](budget) range
@@ -433,6 +454,16 @@
 - [more than 700](budget)
 - [More than 700](budget)
 - [Lesser than 300](budget)
+- [lesser than Rs.300]{"entity": "budget", "value": "lesser than 300"}
+- [lesser than Rs 300]{"entity": "budget", "value": "lesser than 300"}
+- [more than 700](budget)Rs
+- [More than 700](budget)Rs
+- [less than 300]{"entity": "budget", "value": "lesser than 300"}
+- [less than 300 Rs]{"entity": "budget", "value": "lesser than 300"}
+- [less than Rs.300]{"entity": "budget", "value": "lesser than 300"}
+- [less than Rs 300]{"entity": "budget", "value": "lesser than 300"}
+- [lesser than 300 Rs]{"entity": "budget", "value": "lesser than 300"}
+- [lesser` than Rs 300]{"entity": "budget", "value": "lesser than 300"}
 - [<300]{"entity": "budget", "value": "lesser than 300"}
 - [>700]{"entity": "budget", "value": "more than 700"}
 - [greater than 700]{"entity": "budget", "value": "more than 700"}
@@ -555,7 +586,18 @@
 ## synonym:gastropub
 - gastro pub
 
+## synonym:hyderabad
+- hydrabad
+
 ## synonym:lesser than 300
+- lesser than Rs.300
+- lesser than Rs 300
+- less than 300
+- less than 300 Rs
+- less than Rs.300
+- less than Rs 300
+- lesser than 300 Rs
+- lesser` than Rs 300
 - <300
 
 ## synonym:more than 700
