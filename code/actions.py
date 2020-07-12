@@ -29,6 +29,7 @@ class ActionSendEmail(Action):
         try:
             affirm = tracker.get_slot('email_affirm')
             email_id = tracker.get_slot('email_id')
+            print("email_id ",email_id," affirm ",affirm)
              ## sendemail
             s = smtplib.SMTP('smtp.gmail.com', 587)
             s.ehlo()
@@ -60,6 +61,8 @@ class ActionSearchRestaurants(Action):
         return 'action_search_restaurants'
 
     def run(self, dispatcher, tracker, domain):
+        print("In action search restaurant")
+
         count = 0
         config = {"user_key": "128343527e861a0747f3baf1c0d09ba6"}
         zomato = zomatopy.initialize_app(config)
@@ -148,7 +151,7 @@ class RestaurantForm(FormAction):
             - intent: value pairs
             - a whole message
             or a list of them, where a first match will be picked"""
-        #print("Inside Slot Mapping")
+        print("Inside Slot Mapping for RestaurantForm")
         return {
             "location": [
                 self.from_entity(
@@ -238,6 +241,7 @@ class RestaurantForm(FormAction):
             # validation failed, set this slot to None, meaning the
             # user will be asked for the slot again
             return {"cuisine": None}
+
     @staticmethod
     def budget_db() -> List[Text]:
         """Database of supported cuisines"""
@@ -275,6 +279,80 @@ class RestaurantForm(FormAction):
             # user will be asked for the slot again
             return {"budget": None}
 
+    def submit(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        """Define what the form has to do
+            after all required slots are filled"""
+
+        # utter submit template
+      #  dispatcher.utter_message(template="utter_submit")
+        return []
+
+
+class EmailForm(FormAction):
+    """Example of a custom form action"""
+
+    def name(self) -> Text:
+        """Unique identifier of the form"""
+        return "email_form"
+
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        """A list of required slots that the form has to fill"""
+
+        return ["email_affirm", "email_id"]
+
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+        """A dictionary to map required slots to
+            - an extracted entity
+            - intent: value pairs
+            - a whole message
+            or a list of them, where a first match will be picked"""
+        print("Inside Slot Mapping for Email id")
+        return {
+            "email_affirm": [self.from_entity(entity="email_affirm", intent=["email_affirm_intent"])],
+            "email_id": [self.from_entity(entity="email_id", intent=["email_affirm_intent","email_id_intent"])]
+        }
+
+  
+    @staticmethod
+    def is_int(string: Text) -> bool:
+        """Check if a string is an integer"""
+
+        try:
+            int(string)
+            return True
+        except ValueError:
+            return False
+
+  
+    def validate_email_affirm(
+        self,
+        value: Text,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        """Validate email_affirm"""
+        print("inside validate_email_affirm..Value",value)
+        return {"email_affirm": value}
+        
+    # USED FOR DOCS: do not rename without updating in docs
+    def validate_email_id(
+        self,
+        value: Text,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        """Validate email_id"""
+
+        return {"email_id": value}
+       
     def submit(
         self,
         dispatcher: CollectingDispatcher,
