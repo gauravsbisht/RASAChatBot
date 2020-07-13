@@ -7,7 +7,7 @@ Conversation Chatbot
 ## Following are the installation steps
 ### Requirements:
 
-1.Python (requires Python 3.6.0 or higher)
+1. Python (requires Python 3.6.0 or higher)
 
 For Windows:
 Use the following code and check whether your Python environment is already installed:
@@ -23,13 +23,13 @@ $ brew update
 $ brew install python
 ``` 
 
-2.Visual Studio: (For Windows only)
+2. Visual Studio: (For Windows only)
 Open the Microsoft Visual Studio link: https://visualstudio.microsoft.com/downloads/
 Select ‘Community version 2019’
 Download the installer and select VC++ Build tools on the list
 
 
-3.Creating a virtual environment
+3. Creating a virtual environment
 We strongly recommend that you create a virtual environment before installing Rasa and Rasa X.
 Virtual environment tools like virtualenv and virtualenvwrapper provide isolated Python environments. They help you install packages without any dependency conflicts and root privileges.
 
@@ -67,7 +67,6 @@ $ python -m spacy link en_core_web_md en
 ``` 
 Note: If the system prompts you to upgrade pip, then use the following commands:
 For Windows:
-
 ```
 python -m pip install --upgrade pip
 ``` 
@@ -77,8 +76,7 @@ pip install pip –upgrade
 pip install setuptools –upgrade
 ```
 
-
-The bot is trained using 
+After the installation is completed and the training data has been created, the bot is trained using 
 ```
 rasa train 
 ```
