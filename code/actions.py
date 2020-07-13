@@ -29,7 +29,6 @@ class ActionSendEmail(Action):
         try:
             affirm = tracker.get_slot('email_affirm')
             email_id = tracker.get_slot('email_id')
-            print("email_id ",email_id," affirm ",affirm)
              ## sendemail
             s = smtplib.SMTP('smtp.gmail.com', 587)
             s.ehlo()
@@ -61,7 +60,6 @@ class ActionSearchRestaurants(Action):
         return 'action_search_restaurants'
 
     def run(self, dispatcher, tracker, domain):
-     #   print("In action search restaurant")
 
         count = 0
         config = {"user_key": "128343527e861a0747f3baf1c0d09ba6"}
@@ -87,7 +85,6 @@ class ActionSearchRestaurants(Action):
         }
 #        response = price + loc + cuisine
 #        dispatcher.utter_message(response)
-        ## venky/gaurav - need to get right codes for the cusines
         response = "Showing you top rated restaurants: \n"
         results = zomato.restaurant_search("", lat, lon, str(cuisines_dict.get(cuisine)), 50000)
         d = json.loads(results)
@@ -191,7 +188,6 @@ class RestaurantForm(FormAction):
             - intent: value pairs
             - a whole message
             or a list of them, where a first match will be picked"""
-        #print("Inside Slot Mapping for RestaurantForm")
         return {
             "location": [
                 self.from_entity(
@@ -253,7 +249,6 @@ class RestaurantForm(FormAction):
         domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
         """Validate cuisine value."""
-		#print("inside validate_location..Loc retrieved",value)
         if value.lower() in self.location_db():
             # validation succeeded, set the value of the "cuisine" slot to value
             return {"location": value}
@@ -354,7 +349,6 @@ class EmailForm(FormAction):
             - intent: value pairs
             - a whole message
             or a list of them, where a first match will be picked"""
-        print("Inside Slot Mapping for Email id")
         return {
             "email_affirm": [self.from_entity(entity="email_affirm", intent=["email_affirm_intent"])],
             "email_id": [self.from_entity(entity="email_id", intent=["email_affirm_intent","email_id_intent"])]
@@ -380,7 +374,6 @@ class EmailForm(FormAction):
         domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
         """Validate email_affirm"""
-        print("inside validate_email_affirm..Value",value)
 
         return {"email_affirm": value}
         
@@ -393,7 +386,6 @@ class EmailForm(FormAction):
         domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
         """Validate email_id"""
-        print("inside validate_email_id:  Value", value)
         pattern = "(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
 
         if value is not None:
