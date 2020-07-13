@@ -7,7 +7,7 @@ Conversation Chatbot
 ## Following are the installation steps
 ### Requirements:
 
-1. Python (requires Python 3.6.0 or higher)
+1.Python (requires Python 3.6.0 or higher)
 
 For Windows:
 Use the following code and check whether your Python environment is already installed:
@@ -23,13 +23,13 @@ $ brew update
 $ brew install python
 ``` 
 
-2. Visual Studio: (For Windows only)
+2.Visual Studio: (For Windows only)
 Open the Microsoft Visual Studio link: https://visualstudio.microsoft.com/downloads/
 Select ‘Community version 2019’
 Download the installer and select VC++ Build tools on the list
 
 
-3. Creating a virtual environment
+3.Creating a virtual environment
 We strongly recommend that you create a virtual environment before installing Rasa and Rasa X.
 Virtual environment tools like virtualenv and virtualenvwrapper provide isolated Python environments. They help you install packages without any dependency conflicts and root privileges.
 
@@ -49,7 +49,7 @@ You can activate the virtual environment by typing the following code:
 $ source ./venv/bin/activate
 ```
 
-4. Installing Rasa and Rasa X:
+4.Installing Rasa and Rasa X:
 
 You can install both Rasa and Rasa X using the following code:
 ```
@@ -59,7 +59,7 @@ $ pip install rasa
 ```
 
 
-5. Install Rasa NLU and Spacy in the same command prompt:
+5.Install Rasa NLU and Spacy in the same command prompt:
 ```
 $ pip install rasa[spacy]
 $ python -m spacy download en_core_web_md
