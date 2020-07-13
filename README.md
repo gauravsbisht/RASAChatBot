@@ -49,7 +49,7 @@ You can activate the virtual environment by typing the following code:
 $ source ./venv/bin/activate
 ```
 
-4.Installing Rasa and Rasa X:
+4. Installing Rasa and Rasa X:
 
 You can install both Rasa and Rasa X using the following code:
 ```
@@ -59,7 +59,7 @@ $ pip install rasa
 ```
 
 
-5.Install Rasa NLU and Spacy in the same command prompt:
+5. Install Rasa NLU and Spacy in the same command prompt:
 ```
 $ pip install rasa[spacy]
 $ python -m spacy download en_core_web_md
