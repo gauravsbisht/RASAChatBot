@@ -119,6 +119,6 @@ Showing you top rated restaurants:
 5.Restaurant :: JW Kitchen - JW Marriott Bengaluru in JW Marriott, 24/1, Vittal Mallya Road, Lavelle Road, Bangalore has been rated 4.6
  And the average price for two people is: 2200
 Should I send you details of all the restaurants on email?
-Your input ->  yes. Please send it to gaurav_sbisht@yahoo.com
+Your input ->  yes. Please send it to urfrndgaurav@gmail.com
 Sent. Bon Appetit!
 ```
