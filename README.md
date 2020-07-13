@@ -84,7 +84,7 @@ and executed using
 ```
 rasa shell
 ```
-After Shell a sample conversation goes as follows 
+After executing rasa Shell a sample conversation goes as follows 
 
 ```
 INFO     root  - Rasa server is up and running.
